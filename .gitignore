@@ -195,3 +195,14 @@ data/
 # Book author ETL configs
 configs/digital_data_etl_maxime_labonne.yaml
 configs/digital_data_etl_paul_iusztin.yaml
+
+# IDE and local tool state
+.vscode/
+.zen/
+
+# Disabled upstream CI/CD workflows
+.github/
+
+# Internal study/interview notes (not for public repo)
+Concepts.md
+interview-narrative-log.md
