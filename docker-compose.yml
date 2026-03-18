@@ -1,0 +1,51 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: "llm_engineering_mongo"
+    # Ensure MongoDB stays up across reboots of the EdgeXpert
+    restart: always
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      # These now match your revised .env credentials exactly
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_DATABASE_USER:-llm_engineering}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DATABASE_PASSWORD:-llm_engineering}
+    ports:
+      - "${MONGO_DATABASE_PORT:-27017}:27017"
+    volumes:
+      # Ensure this points to a path on your 4TB drive if it's not the default partition
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - local
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: "llm_engineering_qdrant"
+    restart: always
+    ports:
+      - "${QDRANT_DATABASE_PORT:-6333}:6333"
+      - 6334:6334
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - local
+
+volumes:
+  # If your 4TB drive is mounted at a specific path, you can use a bind mount instead
+  mongo_data:
+  qdrant_data:
+
+networks:
+  local:
+    driver: bridge
