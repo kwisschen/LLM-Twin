@@ -1,0 +1,15 @@
+# configs/digital_data_etl_github.yaml
+# Manifest for curated GitHub repositories
+
+# Your name to associate with the data in MongoDB
+user_full_name: "Christopher Chen"
+
+# The list of repositories your twin will learn from
+links:
+  - https://github.com/kwisschen/chris-portfolio
+  - https://github.com/kwisschen/patent-analyzer
+  - https://github.com/kwisschen/gaming-website
+  - https://github.com/kwisschen/critter-collector
+  - https://github.com/kwisschen/patent-translator-core
+  - https://github.com/kwisschen/AIPatentTranslation
+  - https://github.com/kwisschen/mlops-llm-twin
