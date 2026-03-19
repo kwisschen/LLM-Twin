@@ -361,7 +361,7 @@ The smoke test was added after a bug that passed layers 1 and 2 but crashed at t
 - [x] LoRA SFT + DPO fine-tuning on GB10 Blackwell
 - [x] Evaluation framework (GPT-4.1-mini judge, accuracy + style scoring)
 - [x] RAG inference pipeline (FastAPI + vLLM microservices)
-- [ ] **Patent Semantic Search** — second RAG application over USPTO patent data, with cross-lingual retrieval (search in English, retrieve similar patents filed in Chinese with translated summaries). Leverages 10 years of patent engineering expertise for domain-aware parsing and retrieval quality evaluation. Same infrastructure (Qdrant, vLLM, FastAPI), new domain. *Separate repository — link coming soon.*
+- [ ] **Agentic Patent Analyst** — autonomous AI agent that performs multi-step prior art research: parses patent claims, formulates search strategies, searches via Google Patents API, evaluates results, compares claim elements against prior art, and generates structured analysis reports. Built with LangGraph for agent orchestration, Serper.dev for external patent search, and Qwen 2.5-32B on self-hosted GPU for reasoning. Domain evaluation by practicing patent professional. *Separate repository — link coming soon.*
 - [ ] Opik tracing integration (end-to-end prompt monitoring)
 - [ ] Live demo deployment (Gradio/Streamlit frontend or screen recording)
 
