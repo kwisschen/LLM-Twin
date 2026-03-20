@@ -274,7 +274,7 @@ Inference prompt must exactly match the SFT training template. Mismatched templa
 ### Installation
 
 ```bash
-git clone https://github.com/<YOUR_USERNAME>/LLM-Twin.git
+git clone https://github.com/kwisschen/LLM-Twin.git
 cd LLM-Twin
 poetry install --without aws
 poetry self add 'poethepoet[poetry_plugin]'
