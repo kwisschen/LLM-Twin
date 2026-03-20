@@ -241,3 +241,43 @@ trl/transformers/peft imports. The patch modifies trainer classes at import time
 | CUDA Toolkit | 13.0 |
 | Triton | 3.5.0 |
 | Key packages | transformers 4.57.6, trl 0.26.1, unsloth 2026.2.1, peft 0.18.1, comet_ml 3.56.0 |
+
+## vLLM Inference Container Recreation
+
+**Same power-cycle rule as the training container.** After host power-off/reboot,
+always `docker rm` + `docker run`. After container-only stop (host stayed on),
+`docker start vllm-inference` is safe.
+
+```bash
+# 1. Remove the old container
+ssh edgexpert "docker rm -f vllm-inference 2>/dev/null; echo 'Cleaned'"
+
+# 2. Recreate from official vLLM image
+ssh edgexpert "docker run -d \
+  --gpus all \
+  --name vllm-inference \
+  -p 8001:8000 \
+  vllm/vllm-openai:latest \
+  --model kwisschen/TwinLlama-3.1-8B-Merged \
+  --dtype bfloat16 \
+  --max-model-len 2048 \
+  --port 8000"
+
+# 3. Wait ~5 minutes (download + load + compile + CUDA graph capture)
+#    Monitor progress:
+ssh edgexpert "docker logs --tail 5 -f vllm-inference"
+#    Look for: "Capturing CUDA graphs (decode, FULL): 100%"
+#    Then Ctrl+C and verify:
+
+curl http://<EDGEXPERT_IP>:8001/v1/models
+```
+
+**Port mapping:** vLLM listens on port 8000 inside the container, mapped to 8001
+on the host (`-p 8001:8000`). All external references (settings.py, FastAPI, docs)
+use port 8001.
+
+**Startup sequence:** Download weights from HuggingFace (~130s) → Load into GPU
+(~86s, 14.99 GiB) → torch.compile (~9s) → CUDA graph capture (~40s) → API ready.
+
+**No `docker commit` needed.** Unlike the training container, `vllm-inference` uses
+the stock `vllm/vllm-openai:latest` image with no additional pip installs.
