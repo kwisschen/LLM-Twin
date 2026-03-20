@@ -1,6 +1,6 @@
 # LLM Twin — Production-Grade Personal LLM System
 
-Fine-tuned Llama 3.1 8B on my own writing, reasoning patterns, and conversation history to generate content in my voice. End-to-end MLOps: data pipelines → LoRA SFT + DPO alignment → RAG inference — running on self-hosted NVIDIA GB10 Blackwell hardware.
+Fine-tuned Llama 3.1 8B on my own writing, reasoning patterns, and conversation history to generate content in my voice. End-to-end MLOps: data pipelines → LoRA SFT + DPO alignment → RAG inference — all trained and served locally on an NVIDIA GB10 Blackwell desktop (128GB unified memory). No cloud GPUs.
 
 ![Model](https://img.shields.io/badge/Model-Llama_3.1_8B-blue)
 ![Training](https://img.shields.io/badge/Training-LoRA_SFT_+_DPO-green)
@@ -8,6 +8,14 @@ Fine-tuned Llama 3.1 8B on my own writing, reasoning patterns, and conversation 
 ![Orchestration](https://img.shields.io/badge/Orchestration-ZenML-orange)
 ![Inference](https://img.shields.io/badge/Inference-vLLM_+_FastAPI-red)
 ![Tracking](https://img.shields.io/badge/Tracking-Comet_ML-yellow)
+
+---
+
+## Demo
+
+![LLM Twin Demo](docs/demo.gif)
+
+Three queries showing the RAG inference pipeline: FastAPI receives a query on MacBook, expands it via GPT-4.1-mini, searches Qdrant, reranks with a cross-encoder, and generates a response through vLLM on EdgeXpert GB10 — all over Tailscale.
 
 ---
 
@@ -361,9 +369,9 @@ The smoke test was added after a bug that passed layers 1 and 2 but crashed at t
 - [x] LoRA SFT + DPO fine-tuning on GB10 Blackwell
 - [x] Evaluation framework (GPT-4.1-mini judge, accuracy + style scoring)
 - [x] RAG inference pipeline (FastAPI + vLLM microservices)
-- [ ] **Agentic Patent Analyst** — autonomous AI agent that performs multi-step prior art research: parses patent claims, formulates search strategies, searches via Google Patents API, evaluates results, compares claim elements against prior art, and generates structured analysis reports. Built with LangGraph for agent orchestration, Serper.dev for external patent search, and Qwen 2.5-32B on self-hosted GPU for reasoning. Domain evaluation by practicing patent professional. *Separate repository — link coming soon.*
-- [ ] Opik tracing integration (end-to-end prompt monitoring)
-- [ ] Live demo deployment (Gradio/Streamlit frontend or screen recording)
+- [ ] **Agentic Patent Analyst** — autonomous multi-step prior art research agent. LangGraph orchestration, Google Patents API via Serper.dev, Qwen 2.5-32B reasoning on self-hosted GPU. Domain evaluation by practicing patent attorney. *Separate repository — link coming soon.*
+- [ ] Opik tracing for inference pipeline (evaluation tracing complete, RAG pipeline tracing pending)
+- [x] Live demo (terminal recording of RAG inference pipeline)
 
 ---
 
@@ -377,9 +385,9 @@ My contributions include: custom ETL pipelines for personal data sources (ChatGP
 
 ## About
 
-**Christopher Chen** — ML / AI Engineer building production LLM systems on self-hosted infrastructure. 10 years in patent engineering — cross-language specification review (EN/CN/JP), workflow automation, and digital transformation. Harvard University ALM candidate (CS focus, 4.0 GPA, expected 2026).
+**Christopher Chen** — ML / AI Engineer building production LLM systems on self-hosted infrastructure. 10 years in patent engineering — cross-language specification review (EN/CN/JP), workflow automation, and digital transformation. Harvard University ALM candidate (expected 2026).
 
-[LinkedIn](#) · [HuggingFace](https://huggingface.co/kwisschen) · [Blog](#)
+[LinkedIn](https://www.linkedin.com/in/kwisschen/) · [HuggingFace](https://huggingface.co/kwisschen) · [Blog](#)
 
 ---
 
