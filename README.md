@@ -369,9 +369,10 @@ The smoke test was added after a bug that passed layers 1 and 2 but crashed at t
 - [x] LoRA SFT + DPO fine-tuning on GB10 Blackwell
 - [x] Evaluation framework (GPT-4.1-mini judge, accuracy + style scoring)
 - [x] RAG inference pipeline (FastAPI + vLLM microservices)
-- [ ] **Agentic Patent Analyst** — autonomous multi-step prior art research agent. LangGraph orchestration, Google Patents API via Serper.dev, Qwen 2.5-32B reasoning on self-hosted GPU. Domain evaluation by practicing patent attorney. *Separate repository — link coming soon.*
-- [ ] Opik tracing for inference pipeline (evaluation tracing complete, RAG pipeline tracing pending)
 - [x] Live demo (terminal recording of RAG inference pipeline)
+- [ ] Opik tracing for inference pipeline (evaluation tracing complete, RAG pipeline tracing pending)
+- [ ] **Agentic Patent Analyst** — autonomous multi-step prior art research agent. LangGraph orchestration, Google Patents API via Serper.dev, Qwen 2.5-32B reasoning on self-hosted GPU. Domain evaluation by practicing patent professional. *Separate repository — link coming soon.*
+
 
 ---
 
