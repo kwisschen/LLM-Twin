@@ -373,7 +373,6 @@ The smoke test was added after a bug that passed layers 1 and 2 but crashed at t
 - [ ] Opik tracing for inference pipeline (evaluation tracing complete, RAG pipeline tracing pending)
 - [ ] **Agentic Patent Analyst** — autonomous multi-step prior art research agent. LangGraph orchestration, Google Patents API via Serper.dev, Qwen 2.5-32B reasoning on self-hosted GPU. Domain evaluation by practicing patent professional. *Separate repository — link coming soon.*
 
-
 ---
 
 ## Credits
